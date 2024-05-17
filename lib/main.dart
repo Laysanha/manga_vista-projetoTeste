@@ -51,7 +51,7 @@ class _AppNavigationState extends State<AppNavigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CustomAppBar(),
+        appBar: const CustomAppBar(),
         backgroundColor: const Color.fromARGB(254, 254, 254, 254),
         body: IndexedStack(
           index: _currentPageIndex,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:manga_vista/components/accountMenu.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -22,7 +23,19 @@ class _CustomAppBarState extends State<CustomAppBar> {
           Row(
             children: [
               IconButton(onPressed: (){}, icon: const Icon(Icons.notifications)),
-              IconButton(onPressed: (){}, icon: const Icon(Icons.account_circle_rounded)),
+              IconButton(
+                  onPressed: (){
+                    showModalBottomSheet(
+                        context: context,
+                        isDismissible: true,
+                        enableDrag: true,
+                        builder: (BuildContext context){
+                          return const AccountMenu();
+                        }
+                    );
+                  },
+                  icon: const Icon(Icons.account_circle_rounded)
+              ),
             ],
           )
         ],
