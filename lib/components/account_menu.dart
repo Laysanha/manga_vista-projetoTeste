@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 class AccountMenu extends StatelessWidget {
   const AccountMenu({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     return Consumer<ThemeProvider>(
@@ -34,21 +34,15 @@ class AccountMenu extends StatelessWidget {
                 ),
               ),
               InkWell(
-                onTap: (){
-                  final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
-                  themeProvider.toggleTheme();
-                },
-                child: ListTile(
-                  title: const Text("Tema"),
-                  leading: Consumer<ThemeProvider>(builder: (context, themeProvider, _) {
-                    return Icon(
-                      themeProvider.currentTheme.brightness ==
-                          Brightness.light ? Icons.light_mode : Icons.dark_mode,
-                    );
-                  },)
+                  onTap: (){
+                    themeProvider.toggleTheme();
+                  },
+                  child: const ListTile(
+                    title: Text("Tema"),
+                    leading: Icon(Icons.light_mode),
                   )
               )
-            ]
+            ],
           );
         }
     );
