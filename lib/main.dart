@@ -25,9 +25,7 @@ class MyApp extends StatelessWidget {
       builder: ( context, themeProvider, _) {
         return MaterialApp(
           title: 'Manga Vista',
-          theme: themeProvider.currentTheme.copyWith(
-            useMaterial3: true,
-          ),
+          theme: themeProvider.currentTheme,
           home: const AppNavigation(),
         );
       },
