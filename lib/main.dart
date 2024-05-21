@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:manga_vista/pages/page_category.dart';
 import 'package:manga_vista/pages/page_home.dart';
 import 'package:manga_vista/pages/page_library.dart';
-
-import 'components/customAppBar.dart';
+import 'package:manga_vista/providers/theme_provider.dart';
+import 'package:provider/provider.dart';
+import 'components/custom_app_bar.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => ThemeProvider(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -15,13 +21,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const AppNavigation(),
+    return Consumer<ThemeProvider>(
+      builder: ( context, themeProvider, _) {
+        return MaterialApp(
+          title: 'Manga Vista',
+          theme: themeProvider.currentTheme.copyWith(
+            useMaterial3: true,
+          ),
+          home: const AppNavigation(),
+        );
+      },
     );
   }
 }
@@ -52,7 +61,7 @@ class _AppNavigationState extends State<AppNavigation> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: const CustomAppBar(),
-        backgroundColor: const Color.fromARGB(254, 254, 254, 254),
+        //backgroundColor: const Color.fromARGB(254, 254, 254, 254),
         body: IndexedStack(
           index: _currentPageIndex,
           children: _pages,
@@ -74,7 +83,7 @@ class _AppNavigationState extends State<AppNavigation> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.grid_view),
                 activeIcon: Icon(Icons.grid_view_sharp),
-                label: 'Categoria'
+                label: 'Categorize'
             ),
           ],
         )

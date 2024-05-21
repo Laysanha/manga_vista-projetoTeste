@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:manga_vista/components/accountMenu.dart';
+import 'package:manga_vista/components/account_menu.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
