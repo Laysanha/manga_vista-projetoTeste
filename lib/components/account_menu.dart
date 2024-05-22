@@ -40,7 +40,7 @@ class AccountMenu extends StatelessWidget {
                 },
                 child: ListTile(
                   title: const Text("Tema"),
-                  leading: Consumer<ThemeProvider>(builder: (context, themeProvider, child) {
+                  leading: Consumer<ThemeProvider>(builder: (context, themeProvider, _) {
                     return Icon(
                       themeProvider.currentTheme.brightness ==
                           Brightness.light ? Icons.light_mode : Icons.dark_mode,
