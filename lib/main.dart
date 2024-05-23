@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:manga_vista/database/database.dart';
 import 'package:manga_vista/pages/page_category.dart';
 import 'package:manga_vista/pages/page_home.dart';
 import 'package:manga_vista/pages/page_library.dart';
 import 'package:manga_vista/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'components/custom_app_bar.dart';
+import 'controllers/obra_controller.dart';
 
-void main() {
+Future<void> main() async {
+  //WidgetsFlutterBinding.ensureInitialized();
+  // Initialize FiFI
+  // sqfliteFfiInit();
+  // databaseFactory = databaseFactoryFfi;
+  // await DatabaseHelper.instance.initDatabase();
+
   runApp(
     ChangeNotifierProvider(
       create: (context) => ThemeProvider(),
