@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:manga_vista/controllers/obra_controller.dart';
 import 'package:manga_vista/database/database.dart';
-
+import 'package:manga_vista/pages/page_detail_obra.dart';
 import '../models/obra_model.dart';
 
 class PageHome extends StatefulWidget {
@@ -12,8 +11,6 @@ class PageHome extends StatefulWidget {
 }
 
 class _PageHomeState extends State<PageHome> {
-  late Future<List<Obra>> _obrasFuture;
-
   @override
   void initState() {
     super.initState();
@@ -22,39 +19,48 @@ class _PageHomeState extends State<PageHome> {
 
   Future<void> _initializeData() async {
     await DatabaseHelper.instance.insertSampleData();
-    setState(() {
-      _obrasFuture = DatabaseHelper.instance.getObras();
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder<List<Obra>>(
-        future: _obrasFuture,
+        future: DatabaseHelper.instance.getObras(),
         builder: (context, snapshot){
-          print(snapshot);
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.connectionState == ConnectionState.done && snapshot.hasError) {
-            print(snapshot.hasError);
             return const Center(child: Text('Erro ao carregar obras. :('));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty){
             return const Center(child: Text('Nenhuma arquivo cadastrado. :('));
           } else {
-            return ListView.builder(
+            return GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 0,
+                  mainAxisSpacing: 8,
+                ),
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 Obra obra = snapshot.data![index];
-
-                print('Nome da obra: ${obra.nomeObra}');
-                print('Gênero da obra: ${obra.generoObra}');
-
-                return ListTile(
-                  title: Text(obra.nomeObra),
-                  subtitle: Text(obra.generoObra),
-                  onTap: (){},
-                );
+                return Card(
+                    elevation: 1,
+                    margin: const EdgeInsets.symmetric(
+                      vertical: 8, horizontal: 16
+                    ),
+                      child: ListTile(
+                        title: Text(obra.nomeObra),
+                        subtitle: Text(obra.generoObra),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PageDetailObra(obra: obra)
+                              )
+                          );
+                        },
+                      )
+                  );
               }
             );
           }

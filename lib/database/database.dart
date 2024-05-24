@@ -11,12 +11,12 @@ class DatabaseHelper {
   DatabaseHelper._instance();
 
   Future<Database> get database async {
-    if(_database != null) return _database!;
+    if (_database != null) return _database!;
     _database = await _initDatabase();
     return _database!;
   }
 
-  Future<Database> _initDatabase() async{
+  Future<Database> _initDatabase() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentsDirectory.path, 'obras_database.db');
     return await openDatabase(
@@ -52,34 +52,114 @@ class DatabaseHelper {
     ''');
   }
 
-  //Dados fakes
   Future<void> insertSampleData() async {
     final db = await database;
     List<Map<String, dynamic>> result = await db.rawQuery('SELECT COUNT(*) FROM obras');
     int? count = Sqflite.firstIntValue(result);
 
     if (count == 0) {
-    //Dados da tabelinha exemplo :)
-    Obra exempleObra = Obra(
-        capaObra: 'Vazio',
-        nomeObra: 'The Promissed no Neverland – Mama-tachi no Tsuisoukyoku',
-        nomeAlternativoObra: 'Mama-tachi no Tsuisoukyoku',
-        generoObra: 'acao',
-        dataRegistroObra: '2024-05-17',
-        dataUpdateObra: '2024-06-25',
-        colecaoScanObra: 'LaysanhaScan',
-        sinopseObra: 'As duas mães do Orfanato Grace Field lembram de eventos importantes de seu passado...',
-        temCorObra: false,
-        maiorIdadeObra: false,
-        statusObra: 'em andamento',
-        tipoObra: 'manga',
-        envolvidosObra: 'Laysa',
-        autorObra: 'nao é a Laysa',
-        artistaObra: 'tb nao é a Laysa',
-        anoLancamentoObra: 2024,
-        comentarioObra: '',
-    );
-    await db.insert('obras', exempleObra.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
+      List<Obra> testeObra = [
+        Obra(
+          capaObra: 'assets/images/imageTeste.png',
+          nomeObra: 'The Promissed no Neverland – Mama-tachi no Tsuisoukyoku',
+          nomeAlternativoObra: 'Mama-tachi no Tsuisoukyoku',
+          generoObra: 'acao',
+          dataRegistroObra: '2024-05-17',
+          dataUpdateObra: '2024-06-25',
+          colecaoScanObra: 'LaysanhaScan',
+          sinopseObra: 'As duas mães do Orfanato Grace Field lembram de eventos importantes de seu passado...',
+          temCorObra: false,
+          maiorIdadeObra: false,
+          statusObra: 'em andamento',
+          tipoObra: 'manga',
+          envolvidosObra: 'Laysa',
+          autorObra: 'nao é a Laysa',
+          artistaObra: 'tb nao é a Laysa',
+          anoLancamentoObra: 2024,
+          comentarioObra: '',
+        ),
+        Obra(
+          capaObra: 'assets/images/imageTeste2.jpg',
+          nomeObra: 'The Promissed no Neverland – Mama-tachi no Tsuisoukyoku',
+          nomeAlternativoObra: 'Mama-tachi no Tsuisoukyoku',
+          generoObra: 'acao',
+          dataRegistroObra: '2024-05-17',
+          dataUpdateObra: '2024-06-25',
+          colecaoScanObra: 'LaysanhaScan',
+          sinopseObra: 'As duas mães do Orfanato Grace Field lembram de eventos importantes de seu passado...',
+          temCorObra: false,
+          maiorIdadeObra: false,
+          statusObra: 'em andamento',
+          tipoObra: 'manga',
+          envolvidosObra: 'Laysa',
+          autorObra: 'nao é a Laysa',
+          artistaObra: 'tb nao é a Laysa',
+          anoLancamentoObra: 2024,
+          comentarioObra: '',
+        ),
+        Obra(
+          capaObra: 'assets/images/imageTeste.png',
+          nomeObra: 'The Promissed no Neverland – Mama-tachi no Tsuisoukyoku',
+          nomeAlternativoObra: 'Mama-tachi no Tsuisoukyoku',
+          generoObra: 'acao',
+          dataRegistroObra: '2024-05-17',
+          dataUpdateObra: '2024-06-25',
+          colecaoScanObra: 'LaysanhaScan',
+          sinopseObra: 'As duas mães do Orfanato Grace Field lembram de eventos importantes de seu passado...',
+          temCorObra: false,
+          maiorIdadeObra: false,
+          statusObra: 'em andamento',
+          tipoObra: 'manga',
+          envolvidosObra: 'Laysa',
+          autorObra: 'nao é a Laysa',
+          artistaObra: 'tb nao é a Laysa',
+          anoLancamentoObra: 2024,
+          comentarioObra: '',
+        ),
+        Obra(
+          capaObra: 'assets/images/imageTeste.png',
+          nomeObra: 'The Promissed no Neverland – Mama-tachi no Tsuisoukyoku',
+          nomeAlternativoObra: 'Mama-tachi no Tsuisoukyoku',
+          generoObra: 'acao',
+          dataRegistroObra: '2024-05-17',
+          dataUpdateObra: '2024-06-25',
+          colecaoScanObra: 'LaysanhaScan',
+          sinopseObra: 'As duas mães do Orfanato Grace Field lembram de eventos importantes de seu passado...',
+          temCorObra: false,
+          maiorIdadeObra: false,
+          statusObra: 'em andamento',
+          tipoObra: 'manga',
+          envolvidosObra: 'Laysa',
+          autorObra: 'nao é a Laysa',
+          artistaObra: 'tb nao é a Laysa',
+          anoLancamentoObra: 2024,
+          comentarioObra: '',
+        ),
+        Obra(
+          capaObra: 'assets/images/imageTeste.png',
+          nomeObra: 'The Promissed no Neverland – Mama-tachi no Tsuisoukyoku',
+          nomeAlternativoObra: 'Mama-tachi no Tsuisoukyoku',
+          generoObra: 'acao',
+          dataRegistroObra: '2024-05-17',
+          dataUpdateObra: '2024-06-25',
+          colecaoScanObra: 'LaysanhaScan',
+          sinopseObra: 'As duas mães do Orfanato Grace Field lembram de eventos importantes de seu passado...',
+          temCorObra: false,
+          maiorIdadeObra: false,
+          statusObra: 'em andamento',
+          tipoObra: 'manga',
+          envolvidosObra: 'Laysa',
+          autorObra: 'nao é a Laysa',
+          artistaObra: 'tb nao é a Laysa',
+          anoLancamentoObra: 2024,
+          comentarioObra: '',
+        ),
+      ];
+
+      for (var obra in testeObra) {
+        print(obra.capaObra);
+        await db.insert('obras', obra.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
+      }
     }
   }
 
