@@ -98,7 +98,7 @@ class DatabaseHelper {
           comentarioObra: '',
         ),
         Obra(
-          capaObra: 'assets/images/imageTeste.png',
+          capaObra: 'Sem foto',
           nomeObra: 'The Promissed no Neverland – Mama-tachi no Tsuisoukyoku',
           nomeAlternativoObra: 'Mama-tachi no Tsuisoukyoku',
           generoObra: 'acao',

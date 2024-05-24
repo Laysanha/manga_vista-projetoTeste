@@ -24,7 +24,7 @@ class PageDetailObra extends StatelessWidget {
 }
 
 Widget _buildImage(String imageUrl) {
-  if(imageUrl.isEmpty) {
+  if(imageUrl.isEmpty || imageUrl == 'Sem foto') {
     //Vou ter uma imagem "Sen capa" no futuro proximo
     return const Text('Sem imagem');
   } else {
