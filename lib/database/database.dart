@@ -82,7 +82,7 @@ class DatabaseHelper {
           capaObra: 'assets/images/imageTeste2.jpg',
           nomeObra: 'The Promissed no Neverland – Mama-tachi no Tsuisoukyoku',
           nomeAlternativoObra: 'Mama-tachi no Tsuisoukyoku',
-          generoObra: 'acao',
+          generoObra: '-vazio-',
           dataRegistroObra: '2024-05-17',
           dataUpdateObra: '2024-06-25',
           colecaoScanObra: 'LaysanhaScan',
@@ -101,7 +101,7 @@ class DatabaseHelper {
           capaObra: 'Sem foto',
           nomeObra: 'The Promissed no Neverland – Mama-tachi no Tsuisoukyoku',
           nomeAlternativoObra: 'Mama-tachi no Tsuisoukyoku',
-          generoObra: 'acao',
+          generoObra: 'romance',
           dataRegistroObra: '2024-05-17',
           dataUpdateObra: '2024-06-25',
           colecaoScanObra: 'LaysanhaScan',
@@ -117,10 +117,10 @@ class DatabaseHelper {
           comentarioObra: '',
         ),
         Obra(
-          capaObra: 'assets/images/imageTeste.png',
+          capaObra: 'assets/images/imageTeste3.png',
           nomeObra: 'The Promissed no Neverland – Mama-tachi no Tsuisoukyoku',
           nomeAlternativoObra: 'Mama-tachi no Tsuisoukyoku',
-          generoObra: 'acao',
+          generoObra: 'aventura',
           dataRegistroObra: '2024-05-17',
           dataUpdateObra: '2024-06-25',
           colecaoScanObra: 'LaysanhaScan',
@@ -136,10 +136,10 @@ class DatabaseHelper {
           comentarioObra: '',
         ),
         Obra(
-          capaObra: 'assets/images/imageTeste.png',
+          capaObra: 'assets/images/imageTeste4.png',
           nomeObra: 'The Promissed no Neverland – Mama-tachi no Tsuisoukyoku',
           nomeAlternativoObra: 'Mama-tachi no Tsuisoukyoku',
-          generoObra: 'acao',
+          generoObra: 'escolar',
           dataRegistroObra: '2024-05-17',
           dataUpdateObra: '2024-06-25',
           colecaoScanObra: 'LaysanhaScan',
@@ -157,7 +157,6 @@ class DatabaseHelper {
       ];
 
       for (var obra in testeObra) {
-        print(obra.capaObra);
         await db.insert('obras', obra.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
       }
     }
@@ -178,5 +177,24 @@ class DatabaseHelper {
     return List.generate(maps.length, (i) {
       return Obra.fromMap(maps[i]);
     });
+  }
+
+  Future<void> updateObra(Obra obra) async {
+    final db = await instance.database;
+    await db.update(
+      'obras',
+      obra.toMap(),
+      where: 'id = ?',
+      whereArgs: [obra.id]
+    );
+  }
+
+  Future<void> deleteObra(Obra obra) async {
+    final db = await instance.database;
+    await db.delete(
+      'obras',
+      where: 'id = ?',
+      whereArgs: [obra.id]
+    );
   }
 }

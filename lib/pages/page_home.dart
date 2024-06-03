@@ -36,31 +36,31 @@ class _PageHomeState extends State<PageHome> {
           } else {
             return GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 0,
-                  mainAxisSpacing: 8,
-                ),
+                crossAxisCount: 2,
+                crossAxisSpacing: 0,
+                mainAxisSpacing: 8,
+              ),
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 Obra obra = snapshot.data![index];
                 return Card(
-                    elevation: 1,
-                    margin: const EdgeInsets.symmetric(
-                      vertical: 8, horizontal: 16
-                    ),
-                      child: ListTile(
-                        title: Text(obra.nomeObra),
-                        subtitle: Text(obra.generoObra),
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => PageDetailObra(obra: obra)
-                              )
-                          );
-                        },
-                      )
-                  );
+                  elevation: 1,
+                  margin: const EdgeInsets.symmetric(
+                    vertical: 8, horizontal: 16
+                  ),
+                  child: ListTile(
+                    title: Text(obra.nomeObra),
+                    subtitle: Text(obra.generoObra),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PageDetailObra(obra: obra)
+                        )
+                      );
+                    },
+                  )
+                );
               }
             );
           }
