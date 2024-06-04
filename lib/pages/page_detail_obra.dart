@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:manga_vista/components/chapters.dart';
 import 'package:manga_vista/components/custom_app_bar.dart';
 import 'package:manga_vista/components/favoriteButton.dart';
 import 'package:manga_vista/models/obra_model.dart';
@@ -27,7 +28,14 @@ class PageDetailObra extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Chapters(obraId: obra.id!)
+                        )
+                    );
+                  },
                   child: const Text('Primeiro Capitulo'),
                 ),
                 TextButton(

@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:manga_vista/models/obra_model.dart';
+import 'package:manga_vista/models/scan_modal.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
@@ -49,6 +50,16 @@ class DatabaseHelper {
         anoLancamentoObra INTEGER,
         comentarioObra TEXT
       )
+    ''');
+
+    await db.execute('''
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      obraId INTEGER,
+      nomeCapitulo TEXT,
+      dataRegistro TEXT,
+      statusCapitulo TEXT,
+      arquivos TEXT,
+      FOREIGN KEY (obraId) REFERENCES obra (id) ON DELETE CASCADE
     ''');
   }
 
@@ -196,5 +207,17 @@ class DatabaseHelper {
       where: 'id = ?',
       whereArgs: [obra.id]
     );
+  }
+
+  Future<void> insertScan(Scan scan) async {
+    final db = await instance.database;
+    await db.insert('scan', scan.toMap());
+  }
+
+  Future<List<Scan>> getScansByObra (int obraId) async {
+    final db = await instance.database;
+    final result = await db.query('scan', where: 'obraId = ?', whereArgs: [obraId]);
+
+    return result.map((json) => Scan.fromMap(json)).toList();
   }
 }
