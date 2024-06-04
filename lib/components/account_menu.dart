@@ -8,9 +8,9 @@ class AccountMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<ThemeProvider>(
-        builder: (context, themeProvider, _){
-          return ListView(
-            children: <Widget>[
+      builder: (context, themeProvider, _){
+        return ListView(
+          children: <Widget>[
               const Padding(
                 padding: EdgeInsets.fromLTRB(16, 28, 12, 12),
                 child: Text(
