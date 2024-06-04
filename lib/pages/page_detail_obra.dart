@@ -18,7 +18,7 @@ class PageDetailObra extends StatelessWidget {
           children: [
             _buildImage(obra.capaObra),
             Text(obra.nomeObra),
-            Text(obra.generoObra),
+            Text(obra.generoObra.join(', ')),
             Text(obra.dataRegistroObra),
             Center(
               child: Text(obra.sinopseObra),

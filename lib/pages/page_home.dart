@@ -50,7 +50,7 @@ class _PageHomeState extends State<PageHome> {
                   ),
                   child: ListTile(
                     title: Text(obra.nomeObra),
-                    subtitle: Text(obra.generoObra),
+                    subtitle: Text(obra.generoObra.join(', ')),
                     onTap: () {
                       Navigator.push(
                         context,

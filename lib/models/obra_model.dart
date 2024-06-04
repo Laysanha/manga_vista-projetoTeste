@@ -3,7 +3,7 @@ class Obra {
   String capaObra;
   String nomeObra;
   String nomeAlternativoObra;
-  String generoObra;
+  List<String> generoObra;
   String dataRegistroObra;
   String dataUpdateObra;
   String colecaoScanObra;
@@ -45,7 +45,7 @@ class Obra {
       'capaObra': capaObra,
       'nomeObra': nomeObra,
       'nomeAlternativoObra' : nomeAlternativoObra,
-      'generoObra' : generoObra,
+      'generoObra' : generoObra.join(','),
       'dataRegistroObra' : dataRegistroObra,
       'dataUpdateObra' : dataUpdateObra,
       'colecaoScanObra' : colecaoScanObra,
@@ -68,7 +68,7 @@ class Obra {
       capaObra: map['capaObra'],
       nomeObra: map['nomeObra'],
       nomeAlternativoObra: map['nomeAlternativoObra'],
-      generoObra: map['generoObra'],
+      generoObra: (map['generoObra'] as String).split(','),
       dataRegistroObra: map['dataRegistroObra'],
       dataUpdateObra: map['dataUpdateObra'],
       colecaoScanObra: map['colecaoScanObra'],
