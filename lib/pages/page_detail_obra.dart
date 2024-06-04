@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:manga_vista/components/custom_app_bar.dart';
+import 'package:manga_vista/components/favoriteButton.dart';
 import 'package:manga_vista/models/obra_model.dart';
+import 'package:path/path.dart';
 
 class PageDetailObra extends StatelessWidget {
   final Obra obra;
@@ -10,14 +12,44 @@ class PageDetailObra extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          _buildImage(obra.capaObra),
-          Text(obra.nomeObra),
-          Text(obra.generoObra),
-          Text(obra.sinopseObra),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            _buildImage(obra.capaObra),
+            Text(obra.nomeObra),
+            Text(obra.generoObra),
+            Text(obra.dataRegistroObra),
+            Center(
+              child: Text(obra.sinopseObra),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  onPressed: (){},
+                  child: const Text('Primeiro Capitulo'),
+                ),
+                TextButton(
+                  onPressed: (){},
+                  child: const Text('Último Capitulo'),
+                ),
+               const FavoriteButton()
+              ]
+            ),
+            const Row(
+              children: [
+                Text(
+                  'Capítulos',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
