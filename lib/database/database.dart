@@ -177,7 +177,7 @@ class DatabaseHelper {
             nomeCapitulo: 'Capítulo 1',
             dataRgistro: '2024-05-19',
             statusCapitulo: 'Novo',
-            arquivoCapitulo: ['assets/images/story 1 (1).jpg', 'assets/images/story 1 (2).jpg']
+            arquivoCapitulo: ['assets/images/story 1 (1).png', 'assets/images/story 1 (2).jpg']
           )
         ];
         for (var scan in testeScans){
