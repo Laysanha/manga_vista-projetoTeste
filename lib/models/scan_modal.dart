@@ -4,7 +4,7 @@ class Scan {
   String nomeCapitulo;
   String dataRgistro;
   String statusCapitulo;
-  String arquivoCapitulo;
+  List<String> arquivoCapitulo;
 
   Scan({
     this.id,
@@ -15,24 +15,26 @@ class Scan {
     required this.arquivoCapitulo,
   });
 
+  factory Scan.fromMap(Map<String, dynamic> map){
+    return Scan(
+      id: map['id'],
+      obraId: map['obraId'],
+      nomeCapitulo: map['nomeCapitulo'],
+      dataRgistro: map['dataRgistro'],
+      statusCapitulo: map['statusCapitulo'],
+      arquivoCapitulo: (map['arquivoCapitulo'] as String).split(','),
+    );
+  }
+
   Map<String, dynamic> toMap(){
     return {
       'id' : id,
       'obraId' : obraId,
       'nomeCapitulo' : nomeCapitulo,
-      'dataRegistro' : dataRgistro,
+      'dataRgistro' : dataRgistro,
       'statusCapitulo' : statusCapitulo,
-      'arquivoCapitulo' : arquivoCapitulo
+      'arquivoCapitulo' : arquivoCapitulo.join(','),
     };
   }
 
-  factory Scan.fromMap(Map<String, dynamic> map){
-    return Scan(
-        obraId: map['obraId'],
-        nomeCapitulo: map['nomeCapitulo'],
-        dataRgistro: map['dataRgistro'],
-        statusCapitulo: map['statusCapitulo'],
-        arquivoCapitulo: map['arquivoCapitulo'],
-    );
-  }
 }

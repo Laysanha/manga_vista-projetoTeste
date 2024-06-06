@@ -53,13 +53,15 @@ class DatabaseHelper {
     ''');
 
     await db.execute('''
+    CREATE TABLE scan (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      obraId INTEGER,
+      obraId INTEGER NOT NULL,
       nomeCapitulo TEXT,
-      dataRegistro TEXT,
+      dataRgistro TEXT,
       statusCapitulo TEXT,
-      arquivos TEXT,
-      FOREIGN KEY (obraId) REFERENCES obra (id) ON DELETE CASCADE
+      arquivoCapitulo TEXT,
+      FOREIGN KEY (obraId) REFERENCES obras (id) ON DELETE CASCADE
+    )
     ''');
   }
 
@@ -67,7 +69,6 @@ class DatabaseHelper {
     final db = await database;
     List<Map<String, dynamic>> result = await db.rawQuery('SELECT COUNT(*) FROM obras');
     int? count = Sqflite.firstIntValue(result);
-
     if (count == 0) {
       List<Obra> testeObra = [
         Obra(
@@ -168,7 +169,20 @@ class DatabaseHelper {
       ];
 
       for (var obra in testeObra) {
-        await db.insert('obras', obra.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
+        int obraId = await db.insert('obras', obra.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
+
+        List<Scan> testeScans = [
+          Scan(
+            obraId: obraId,
+            nomeCapitulo: 'Capítulo 1',
+            dataRgistro: '2024-05-19',
+            statusCapitulo: 'Novo',
+            arquivoCapitulo: ['assets/images/story 1 (1).jpg', 'assets/images/story 1 (2).jpg']
+          )
+        ];
+        for (var scan in testeScans){
+          await db.insert('scan', scan.toMap());
+        }
       }
     }
   }

@@ -3,7 +3,6 @@ import 'package:manga_vista/components/chapters.dart';
 import 'package:manga_vista/components/custom_app_bar.dart';
 import 'package:manga_vista/components/favoriteButton.dart';
 import 'package:manga_vista/models/obra_model.dart';
-import 'package:path/path.dart';
 
 class PageDetailObra extends StatelessWidget {
   final Obra obra;
@@ -13,7 +12,7 @@ class PageDetailObra extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
@@ -28,14 +27,7 @@ class PageDetailObra extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton(
-                  onPressed: (){
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Chapters(obraId: obra.id!)
-                        )
-                    );
-                  },
+                  onPressed: (){},
                   child: const Text('Primeiro Capitulo'),
                 ),
                 TextButton(
@@ -56,6 +48,7 @@ class PageDetailObra extends StatelessWidget {
                 ),
               ],
             ),
+            Chapters(obraId: obra.id!)
           ],
         ),
       ),
