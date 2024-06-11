@@ -43,22 +43,35 @@ class _PageHomeState extends State<PageHome> {
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 Obra obra = snapshot.data![index];
-                return Card(
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PageDetailObra(obra: obra)
+                      )
+                    );
+                  },
+                  child: Card(
                   elevation: 1,
-                  margin: const EdgeInsets.symmetric(
-                    vertical: 8, horizontal: 16
-                  ),
-                  child: ListTile(
-                    title: Text(obra.nomeObra),
-                    subtitle: Text(obra.generoObra),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PageDetailObra(obra: obra)
-                        )
-                      );
-                    },
+                  margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          obra.capaObra.isNotEmpty
+                            ? Image.asset(
+                            obra.capaObra,
+                            width: 105,
+                            height: 105,
+                            fit: BoxFit.cover)
+                          : const Icon(Icons.image_not_supported_outlined, size: 50),
+
+                          Text(obra.nomeObra),
+                          Text(obra.generoObra),
+                        ]
+                      )
+                    )
                   )
                 );
               }
