@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:manga_vista/pages/page_login.dart';
 import 'package:manga_vista/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
-import 'components/app_navigation.dart';
-
 
 Future<void> main() async {
   runApp(
@@ -24,7 +23,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'Manga Vista',
           theme: themeProvider.currentTheme,
-          home: const AppNavigation(),
+          home: const LoginPage(),
         );
       },
     );
