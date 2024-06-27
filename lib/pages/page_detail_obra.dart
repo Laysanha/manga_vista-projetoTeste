@@ -3,6 +3,7 @@ import 'package:manga_vista/components/chapters.dart';
 import 'package:manga_vista/components/custom_app_bar.dart';
 import 'package:manga_vista/components/favoriteButton.dart';
 import 'package:manga_vista/models/obra_model.dart';
+import 'package:manga_vista/pages/page_login.dart';
 
 class PageDetailObra extends StatelessWidget {
   final Obra obra;
@@ -48,7 +49,10 @@ class PageDetailObra extends StatelessWidget {
                 ),
               ],
             ),
-            Chapters(obraId: obra.id!)
+            Chapters(obraId: obra.id!),
+            ElevatedButton(onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage()));
+            }, child: const Text('btn teste'))
           ],
         ),
       ),

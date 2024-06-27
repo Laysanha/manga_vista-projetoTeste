@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:manga_vista/models/obra_model.dart';
 import 'package:manga_vista/models/scan_modal.dart';
+import 'package:manga_vista/models/user_model.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
@@ -61,6 +62,14 @@ class DatabaseHelper {
       statusCapitulo TEXT,
       arquivoCapitulo TEXT,
       FOREIGN KEY (obraId) REFERENCES obras (id) ON DELETE CASCADE
+    )
+    ''');
+
+    await db.execute('''
+    CREATE TABLE users(
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      email TEXT,
+      password TEXT
     )
     ''');
   }
@@ -233,5 +242,23 @@ class DatabaseHelper {
     final result = await db.query('scan', where: 'obraId = ?', whereArgs: [obraId]);
 
     return result.map((json) => Scan.fromMap(json)).toList();
+  }
+
+  Future<void> insertUser(User user) async {
+    final db = await database;
+    await db.insert('Users', user.toMap());
+  }
+
+  Future<User?> getUserByEmailAndPassword(String email, String password) async {
+    final db = await database;
+    final result = await db.query(
+      'users',
+      where: 'email = ? AND password = ?',
+      whereArgs: [email, password],
+    );
+    if (result.isNotEmpty) {
+      return User.fromMap(result.first);
+    }
+    return null;
   }
 }
